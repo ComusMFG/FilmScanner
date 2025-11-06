@@ -48,6 +48,68 @@ The processing pipeline consists of several key steps:
    pip install -r requirements.txt
    ```
 
+## Film Speed Calculator
+
+Before capturing your film, use the film speed calculator to determine the optimal film transit speed for your setup. This helps ensure you get sharp exposures and enough captures per frame for best-frame selection.
+
+### Quick Start
+
+**Interactive mode (easiest):**
+```bash
+python film_speed_calculator.py --interactive
+```
+
+**Command-line mode:**
+```bash
+# For Super 8 with 60fps 4K camera
+python film_speed_calculator.py --format super8 --fps 60 --resolution 2160
+
+# For Regular 8mm with 120fps HD camera
+python film_speed_calculator.py --format 8mm --fps 120 --resolution 1080
+
+# For 16mm with custom settings
+python film_speed_calculator.py --format 16mm --fps 240 --resolution 2160 --max-blur 5
+```
+
+### Understanding the Results
+
+The calculator provides:
+- **Recommended speed** in mm/sec and inches/sec
+- **Limiting factor** (sharpness vs. capture coverage)
+- **Expected motion blur** in pixels
+- **Captures per film frame** (how many times each frame is captured)
+- **Film frames per second** (scanning speed)
+
+### Example Output
+
+```
+======================================================================
+RECOMMENDED FILM SPEED
+======================================================================
+  13.56 mm/sec
+  0.534 inches/sec
+
+Expected Performance:
+  Motion blur: 5.00 pixels
+  Captures per film frame: 86.4
+  Film frames per second: 2.78
+```
+
+### Parameters
+
+- `--format`: Film format (`8mm`, `super8`, or `16mm`)
+- `--fps`: Camera capture frame rate
+- `--resolution`: Camera vertical resolution in pixels
+- `--shutter`: Shutter angle in degrees (default: 180°)
+- `--min-captures`: Minimum captures per frame desired (default: 5)
+- `--max-blur`: Maximum acceptable blur in pixels (default: 2.0)
+
+**Tips:**
+- Higher camera FPS allows faster film speed
+- Higher resolution requires slower speed for same blur level
+- Faster shutter (lower angle) reduces blur but requires more light
+- 5-20 captures per frame is a good range for quality
+
 ## Usage
 
 ### Basic Usage
@@ -129,7 +191,7 @@ processing options:
 For best results when capturing your film:
 
 1. **Lighting**: Use even, bright backlighting to create strong contrast for sprocket holes
-2. **Speed**: Maintain consistent film speed - not too fast or too slow
+2. **Speed**: Use the film speed calculator to determine optimal speed for your setup - maintaining consistent speed is critical
 3. **Focus**: Keep the film in focus throughout the capture
 4. **Position**: Ensure sprocket holes are visible on one edge of the frame
 5. **Camera**: Use the highest resolution available (4K recommended)
@@ -137,9 +199,11 @@ For best results when capturing your film:
 ### Recommended Capture Settings
 
 - **Resolution**: 4K (3840x2160) or higher
-- **Frame Rate**: 60fps or higher
-- **Film Speed**: ~3-5 inches per second
+- **Frame Rate**: 60fps or higher (120fps+ ideal)
+- **Film Speed**: Use the film speed calculator - typically 0.1-0.5 inches/sec for quality
 - **Sprocket Position**: Left 10-15% of frame
+
+**Note:** The film speed calculator will provide optimal speed based on your specific camera settings.
 
 ## Architecture
 
